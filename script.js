@@ -5,10 +5,13 @@ const cartItemsContainer = document.getElementById("cart-items");
 const closeCartBtn = document.querySelector(".close-cart");
 const totalPriceElement = document.getElementById("total-price");
 const placeOrderBtn = document.querySelector(".submit-order");
+const buyModal = document.getElementById("buyModal");
+const closeBuyBtn = document.querySelector(".close");
+const submitBtn = document.querySelector(".submit");
 
 let cart = [];
 
-// Function to update cart UI
+// Update cart display
 function updateCart() {
   cartItemsContainer.innerHTML = "";
   let total = 0;
@@ -33,28 +36,25 @@ function updateCart() {
   totalPriceElement.innerText = total.toFixed(2);
 }
 
-// Event delegation for cart buttons (+, -, delete)
+// Cart actions
 cartItemsContainer.addEventListener("click", (e) => {
   if (e.target.classList.contains("qty-btn")) {
     const action = e.target.getAttribute("data-action");
     const index = parseInt(e.target.getAttribute("data-index"));
 
     if (action === "increase") {
-      cart[index].quantity += 1;
+      cart[index].quantity++;
     } else if (action === "decrease") {
-      if (cart[index].quantity > 1) {
-        cart[index].quantity -= 1;
-      } else {
-        cart.splice(index, 1); // Remove item if qty = 1
-      }
+      cart[index].quantity > 1 ? cart[index].quantity-- : cart.splice(index, 1);
     } else if (action === "delete") {
       cart.splice(index, 1);
     }
+
     updateCart();
   }
 });
 
-// Add to Cart
+// Add to cart
 buyBtns.forEach(btn => {
   btn.addEventListener("click", () => {
     const card = btn.closest(".card");
@@ -74,36 +74,34 @@ buyBtns.forEach(btn => {
   });
 });
 
-// Close cart modal
-closeCartBtn.addEventListener("click", () => {
-  cartModal.style.display = "none";
-});
+// Close modals
+closeCartBtn.onclick = () => cartModal.style.display = "none";
+closeBuyBtn.onclick = () => buyModal.style.display = "none";
 
-// Close when clicking outside the cart modal
+// Outside click
 window.addEventListener("click", (e) => {
-  if (e.target === cartModal) {
-    cartModal.style.display = "none";
-  }
+  if (e.target === cartModal) cartModal.style.display = "none";
+  if (e.target === buyModal) buyModal.style.display = "none";
 });
 
-// Place Order button - show checkout modal
+// Place Order → show buy modal
 placeOrderBtn.addEventListener("click", () => {
   cartModal.style.display = "none";
-  document.getElementById("buyModal").style.display = "flex";
+  buyModal.style.display = "flex";
 });
 
-// Close Buy Modal
-document.querySelector(".close").addEventListener("click", () => {
-  document.getElementById("buyModal").style.display = "none";
-});
+// Submit order
+submitBtn.addEventListener("click", () => {
+  const name = buyModal.querySelector('input[placeholder="Enter Your Name"]').value.trim();
+  const address = buyModal.querySelector('input[placeholder="Enter Your Address"]').value.trim();
+  const mobile = buyModal.querySelector('input[placeholder="Enter Your Mobile Number"]').value.trim();
 
-// Optional: Close Buy Modal when clicking outside
-window.addEventListener("click", (e) => {
-  const buyModal = document.getElementById("buyModal");
-  if (e.target === buyModal) {
+  if (name && address && mobile) {
+    alert("✅ Order placed successfully!");
     buyModal.style.display = "none";
+    cart = [];
+    updateCart();
+  } else {
+    alert("⚠️ Please fill in all details.");
   }
 });
-
-
-
