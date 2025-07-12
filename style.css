@@ -1,0 +1,252 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background-color: #fdfdfd;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Navbar */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #000;
+  padding: 1rem 2rem;
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+nav h2 {
+  font-size: 1.8rem;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+nav ul li a:hover {
+  color: #ff4081;
+}
+
+
+.icon {
+  display: none;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+
+/* Sections */
+section {
+  padding: 4rem 2rem;
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* Shop Cards */
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.card {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card img {
+  width: 100%;
+  height: auto;
+}
+
+.card h3 {
+  font-size: 1.3rem;
+  margin: 0.5rem;
+  color: #222;
+}
+
+.card p {
+  margin: 0.3rem 0.5rem;
+  font-size: 0.95rem;
+}
+
+/* Buttons */
+.buy-btn {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background-color: #ff4081;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  margin: 0.5rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.buy-btn:hover {
+  background-color: #e73370;
+}
+
+/* Reviews */
+.reviews {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.review {
+  flex: 1 1 250px;
+  background: #fff8f9;
+  padding: 1rem;
+  border-left: 4px solid #ff4081;
+  border-radius: 8px;
+}
+
+/* Blogs */
+.blogs {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.blog {
+  flex: 1 1 250px;
+  background: #fafafa;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  text-align: center;
+  border-radius: 10px;
+}
+
+.blog img {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+/* Contact */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+form input,
+form textarea,
+form select {
+  padding: 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  resize: none;
+}
+
+form button {
+  background-color: #ff4081;
+  color: white;
+  border: none;
+  padding: 0.8rem;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+/* Modal */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.modal-content {
+  background-color: #fff;
+  margin: 10% auto;
+  padding: 2rem;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 400px;
+  position: relative;
+}
+
+.modal-content input,
+.modal-content select {
+  width: 100%;
+  padding: 0.7rem;
+  margin: 0.5rem 0;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.modal-content .submit {
+  background-color: #28a745;
+  color: white;
+  padding: 0.6rem;
+  border: none;
+  border-radius: 20px;
+  width: 100%;
+  margin-top: 1rem;
+  cursor: pointer;
+}
+
+.close {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  nav ul {
+    flex-direction: column;
+    background-color: #000;
+    position: absolute;
+    top: 60px;
+    left: -100%;
+    width: 100%;
+    transition: all 0.3s ease;
+  }
+
+  nav ul.show {
+    left: 0;
+  }
+
+  #menu-icon {
+    display: block;
+    font-size: 1.8rem;
+    cursor: pointer;
+  }
+}
+
